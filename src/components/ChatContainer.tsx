@@ -171,13 +171,14 @@ export function ChatContainer({ className }: ChatContainerProps) {
   });
 
   return (
-    <div className={cn("flex flex-col h-screen relative", className)} {...getRootProps()}>
-      <input {...getInputProps()} />
+    <div className={cn("flex flex-col h-screen relative", className)}>
+      <div {...getRootProps()} className="flex-1 flex flex-col">
+        <input {...getInputProps()} />
       
       {/* Messages Container */}
       <div
         ref={containerRef}
-        className="flex-1 overflow-y-auto bg-chat-bg px-4 md:px-8 py-6 space-y-4"
+        className="flex-1 overflow-y-auto bg-chat-bg px-4 md:px-8 py-6 pb-32 space-y-4"
       >
         <AnimatePresence initial={false}>
           {messages.map((message) => (
@@ -185,6 +186,10 @@ export function ChatContainer({ className }: ChatContainerProps) {
           ))}
         </AnimatePresence>
         <div ref={messagesEndRef} />
+      </div>
+
+      {/* Drop Overlay */}
+      <DropOverlay isVisible={isDragActive} isDragActive={isDragAccept} />
       </div>
 
       {/* Scroll to bottom button */}
@@ -213,8 +218,6 @@ export function ChatContainer({ className }: ChatContainerProps) {
         <FloatingInput onSendMessage={handleSendMessage} isLoading={isLoading} />
       </div>
 
-      {/* Drop Overlay */}
-      <DropOverlay isVisible={isDragActive} isDragActive={isDragAccept} />
     </div>
   );
 }
