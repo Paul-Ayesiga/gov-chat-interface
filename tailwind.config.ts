@@ -61,7 +61,40 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				/* Government theme colors */
+				'gov-navy': 'hsl(var(--gov-navy))',
+				'gov-navy-light': 'hsl(var(--gov-navy-light))',
+				'gov-blue': 'hsl(var(--gov-blue))',
+				'gov-gray': {
+					50: 'hsl(var(--gov-gray-50))',
+					100: 'hsl(var(--gov-gray-100))',
+					200: 'hsl(var(--gov-gray-200))',
+					600: 'hsl(var(--gov-gray-600))',
+					900: 'hsl(var(--gov-gray-900))',
+				},
+				/* Chat-specific colors */
+				'chat-bg': 'hsl(var(--chat-bg))',
+				'chat-bubble-user': 'hsl(var(--chat-bubble-user))',
+				'chat-bubble-ai': 'hsl(var(--chat-bubble-ai))',
+				'chat-input-bg': 'hsl(var(--chat-input-bg))',
+			},
+			backgroundImage: {
+				'gradient-nav': 'var(--gradient-nav)',
+				'gradient-accent': 'var(--gradient-accent)',
+			},
+			boxShadow: {
+				'elegant': 'var(--shadow-elegant)',
+				'chat': 'var(--shadow-chat)',
+				'floating': 'var(--shadow-floating)',
+			},
+			transitionTimingFunction: {
+				'smooth': 'var(--transition-smooth)',
+				'spring': 'var(--transition-spring)',
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
