@@ -56,14 +56,55 @@ export function ChatSidebar({ className }: ChatSidebarProps) {
   };
 
   const navigationItems = [
-    { icon: MessageSquare, label: 'New Chat', action: () => {} },
-    { icon: History, label: 'Chat History', action: () => {} },
-    { icon: Settings, label: 'Settings', action: () => {} },
+    { 
+      icon: MessageSquare, 
+      label: 'New Chat', 
+      action: () => {
+        console.log('Starting new chat...');
+        // Add actual new chat functionality here
+      },
+      isActive: true
+    },
+    { 
+      icon: History, 
+      label: 'Chat History', 
+      action: () => {
+        console.log('Opening chat history...');
+        // Add actual history functionality here
+      },
+      isActive: false
+    },
+    { 
+      icon: Settings, 
+      label: 'Settings', 
+      action: () => {
+        console.log('Opening settings...');
+        // Add actual settings functionality here
+      },
+      isActive: false
+    },
   ];
 
   const utilityItems = [
-    { icon: Download, label: 'Export Chat', action: () => {} },
-    { icon: Trash2, label: 'Clear All', action: () => {} },
+    { 
+      icon: Download, 
+      label: 'Export Chat', 
+      action: () => {
+        console.log('Exporting chat...');
+        // Add actual export functionality here
+      },
+      isActive: false
+    },
+    { 
+      icon: Trash2, 
+      label: 'Clear All', 
+      action: () => {
+        console.log('Clearing all chats...');
+        // Add actual clear functionality here
+      },
+      isActive: false,
+      isDestructive: true
+    },
   ];
 
   const SidebarContent = () => (
@@ -89,18 +130,40 @@ export function ChatSidebar({ className }: ChatSidebarProps) {
           </h3>
           <div className="space-y-1">
             {navigationItems.map((item, index) => (
-              <Button
+              <motion.div
                 key={index}
-                variant="ghost"
-                className="w-full justify-start gap-3 text-primary-foreground hover:bg-white/10 hover:text-white"
-                onClick={() => {
-                  item.action();
-                  closeMobileSidebar();
-                }}
+                whileHover={{ x: 4 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <item.icon className="w-4 h-4" />
-                {item.label}
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={cn(
+                    "w-full justify-start gap-3 text-primary-foreground transition-all duration-200 relative overflow-hidden group",
+                    item.isActive 
+                      ? "bg-white/20 text-white shadow-sm" 
+                      : "hover:bg-white/10 hover:text-white",
+                    "before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-white before:scale-y-0 before:transition-transform before:duration-200",
+                    item.isActive && "before:scale-y-100"
+                  )}
+                  onClick={() => {
+                    item.action();
+                    closeMobileSidebar();
+                  }}
+                >
+                  <item.icon className={cn(
+                    "w-4 h-4 transition-transform duration-200",
+                    "group-hover:scale-110"
+                  )} />
+                  <span className="font-medium">{item.label}</span>
+                  {item.isActive && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="ml-auto w-2 h-2 bg-white rounded-full"
+                    />
+                  )}
+                </Button>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -111,18 +174,32 @@ export function ChatSidebar({ className }: ChatSidebarProps) {
           </h3>
           <div className="space-y-1">
             {utilityItems.map((item, index) => (
-              <Button
+              <motion.div
                 key={index}
-                variant="ghost"
-                className="w-full justify-start gap-3 text-primary-foreground hover:bg-white/10 hover:text-white"
-                onClick={() => {
-                  item.action();
-                  closeMobileSidebar();
-                }}
+                whileHover={{ x: 4 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <item.icon className="w-4 h-4" />
-                {item.label}
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={cn(
+                    "w-full justify-start gap-3 text-primary-foreground transition-all duration-200 group",
+                    item.isDestructive 
+                      ? "hover:bg-destructive/20 hover:text-red-300" 
+                      : "hover:bg-white/10 hover:text-white"
+                  )}
+                  onClick={() => {
+                    item.action();
+                    closeMobileSidebar();
+                  }}
+                >
+                  <item.icon className={cn(
+                    "w-4 h-4 transition-all duration-200",
+                    "group-hover:scale-110",
+                    item.isDestructive && "group-hover:text-red-400"
+                  )} />
+                  <span className="font-medium">{item.label}</span>
+                </Button>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -130,10 +207,14 @@ export function ChatSidebar({ className }: ChatSidebarProps) {
 
       {/* Footer */}
       <div className="p-4 border-t border-white/10">
-        <div className="flex items-center gap-2 text-xs opacity-60">
+        <motion.div 
+          className="flex items-center gap-2 text-xs opacity-60"
+          animate={{ opacity: [0.6, 0.8, 0.6] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
           <Bot className="w-4 h-4" />
           <span>Secure • Encrypted • Compliant</span>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

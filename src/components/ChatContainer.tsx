@@ -209,7 +209,9 @@ export function ChatContainer({ className }: ChatContainerProps) {
       </AnimatePresence>
 
       {/* Floating Input */}
-      <FloatingInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+      <div className="relative">
+        <FloatingInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+      </div>
 
       {/* Drop Overlay */}
       <DropOverlay isVisible={isDragActive} isDragActive={isDragAccept} />

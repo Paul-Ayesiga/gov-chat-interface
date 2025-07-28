@@ -62,11 +62,12 @@ export function FloatingInput({ onSendMessage, isLoading = false, className }: F
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        "fixed bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 z-30",
+        "fixed bottom-6 w-full px-4 z-30",
         className
       )}
     >
-      <div className="bg-chat-input-bg border border-border rounded-2xl shadow-floating p-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-chat-input-bg border border-border rounded-2xl shadow-floating p-4">
         {/* File attachments */}
         <AnimatePresence>
           {attachedFiles.length > 0 && (
@@ -161,6 +162,7 @@ export function FloatingInput({ onSendMessage, isLoading = false, className }: F
           )}>
             {message.length}/2000
           </span>
+        </div>
         </div>
       </div>
     </motion.div>
